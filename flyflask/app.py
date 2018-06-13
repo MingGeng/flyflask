@@ -29,7 +29,6 @@ def register_blueprints(app):
     app.register_blueprint(admin)
     app.register_blueprint(user)
 
-
 def create_app(config):
     app = Flask(__name__)
     app.config.from_object(configs.get(config))
