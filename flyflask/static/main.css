@@ -1,0 +1,27 @@
+body {}
+
+.form {
+    width: 400px;
+    margin: 0 auto;
+}
+
+a,
+a:hover,
+a:visited {
+    text-decoration: none !important;
+}
+
+.env__name,
+.env__description {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap
+}
+
+.env img {
+    height: 160px !important;
+}
+
+.nav-pagination {
+    text-align: center;
+}

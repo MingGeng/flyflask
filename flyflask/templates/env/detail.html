@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+ {% block title %}
+ Enveronment Details - {{ env.name }}
+ {% endblock %}
+
+ {% block body %}
+<div class="jumbotron">
+    <h2>{{ env.name}}</h2>
+    <p>{{ env.description }}</p>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="list-group">
+            {% for mdb in env.mdbs %}
+            <a href="{{ mdb.url }}" class="list-group-item">
+                <span class="glyphicon " aria-hidden="true">{{ mdb.name }} - {{ mdb.description }}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="col-md-4">
+    <h3>环境负责人:</h3>
+    <div class="media">
+        <div class="media-left">
+            {# todo: user avatar ,add address in below <a>'s href #}
+            <a href="#">
+                <img src="" alt="avatar" class="media-object">
+            </a>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading"> {{ env.person_in_charge.username }} </h4>
+              {{env.person_in_charge.job}}
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock %}

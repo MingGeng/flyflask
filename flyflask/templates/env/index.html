@@ -1,0 +1,27 @@
+{% extends "base.html" %} 
+{% set active_page = "environments" %}
+{%block title %}
+Enveronments
+{% endblock %} 
+
+{% from "macros.html" import render_pagination %}
+
+{%block body %}
+<div class="row">
+    {% for env in pagination.items %}
+        <div class="col-sm-6 col-md-4 env">
+            <div class="thumbnail">
+                <a href="{{ env.url }}" target="_blank">
+                    <div class="caption">
+                    <h4 class="env__name">{{ env.name }}</h4>
+                    <p class="env__description">{{ env.description }}</p>
+                </div>
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+{{ render_pagination(pagination, 'front.env_index') }}
+{% endblock %}

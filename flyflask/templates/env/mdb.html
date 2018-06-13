@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+ {% from "macros.html" import render_form %}
+{% block title %}
+    {{mdb.name}}
+{% endblock %}
+
+{% block head_css %}
+    {{ super() }}
+    <link rel="stylesheet" href="http://vjs.zencdn.net/6.2.7/video-js.css">
+{% endblock %}
+
+{% block body %}
+{{ mdb.description }} - {{ mdb.mdb_url }}
+<hr>
+{% for version in versions %}
+<hr>
+{{ version }}
+<hr>
+{% endfor %}
+<p>
+    <button class="button">升级版本</button>
+</p>
+
+<div class="form">
+    <h2>migrate</h2>
+ {{ render_form(form, rout_str) }}
+
+</div>
+
+<h3>Migrate</h3>
+
+{% endblock %}
+
+
+
+{% block tail_js %}
+    {{ super() }}
+    <script src="http://vjs.zencdn.net/6.2.8/video.js"></script>
+{% endblock %}
