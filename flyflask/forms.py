@@ -59,16 +59,15 @@ class LoginForm(FlaskForm):
 
 class MigrateForm(FlaskForm):
     rout_str = ""
-    version = SelectField('Version', validators=[Required()], choices=[
-                          ('0', '全部'), ('1', '待审核'), ('2', '认证成功'), ('3', '认证失败')])
+    version = SelectField('Version', validators=[Required()], choices=[('0', '全部'), ('1', '待审核'), ('2', '认证成功'), ('3', '认证失败')])
     mdb_id = StringField('mdb_id')
     # mdb = Mdb.query.get_or_404(mdb_id)
     # validators = [Required(), Length(3, 24), Regexp('^[A-Za-z0-9]*$', 0, 'Username must have only letters,  numbers!')]
     # email = StringField('Email:', validators=[Required(), Email(message='Please input currect email address!')])
     # password = PasswordField('Password:', validators=[Required(), Length(6, 24, message='Password Length need to between 6 to 24!')])
     # repeat_password = PasswordField('Repeat Password:', validators=[Required(), EqualTo('password')])
-    menu_id = SelectField(label = "所属菜单",validators = [DataRequired("请选择菜单!")], coerce = int,
-                         choices = "",render_kw = {"class":"form-control"})
+    menu_id = SelectField(label = "所属菜单",validators = [DataRequired("请选择菜单!")], 
+    coerce = int, choices = "",render_kw = {"class":"form-control"})
 
     # def __init__(self, *args, **kwargs):
     #     self.choices = [(v.id, v.name) for v in Env.query.all()]

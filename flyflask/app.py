@@ -20,8 +20,6 @@ def register_extensions(app):
     login_manager.login_view = 'front.login'
 
 # 注册蓝图
-
-
 def register_blueprints(app):
     app.register_blueprint(front)
     # 环境蓝图
