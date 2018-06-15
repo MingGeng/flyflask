@@ -13,7 +13,7 @@ def detail(env_id):
     return render_template('env/detail.html', env=env)
 
 
-@env.route('/<int:env_id>/mdbs/<int:mdb_id>')
+@env.route('/<int:env_id>/mdbs/<int:mdb_id>', methods=['GET', 'POST'])
 @login_required
 def mdb(env_id, mdb_id):
     mdb = Mdb.query.get_or_404(mdb_id)
@@ -21,6 +21,12 @@ def mdb(env_id, mdb_id):
     form = MigrateForm()
     form.menu_id.choices = [(v.id, v.name) for v in Mdb.query.all()]
     form.rout_str = '/envs/' + str(mdb.env_id) + '/mdbs/' + str(mdb.id)
+
+    if form.validate_on_submit():
+        form.migrate()
+        flash('脚本更新成功', 'success')
+        # return redirect(url_for('front.index'))
+
     return render_template('env/mdb.html', mdb=mdb, versions=versions, form=form, rout_str=form.rout_str)
 
 # @env.route('/migrate', methods=['GET', 'POST'])
@@ -28,7 +34,7 @@ def mdb(env_id, mdb_id):
 # def migrate():
 #     form = MigrateForm()  # obj=current_user
 #     if form.validate_on_submit():
-#         # form.update_profile(current_user)
+        # form.update_profile(current_user)
 #         flash('个人信息更新成功', 'success')
 #         return redirect(url_for('front.index'))
 #     return render_template('env/mdb.html', form=form)

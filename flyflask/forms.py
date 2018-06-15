@@ -59,13 +59,13 @@ class LoginForm(FlaskForm):
 
 class MigrateForm(FlaskForm):
     rout_str = ""
-    version = SelectField('Version', validators=[Required()], choices=[('0', '全部'), ('1', '待审核'), ('2', '认证成功'), ('3', '认证失败')])
     mdb_id = StringField('mdb_id')
     # mdb = Mdb.query.get_or_404(mdb_id)
     # validators = [Required(), Length(3, 24), Regexp('^[A-Za-z0-9]*$', 0, 'Username must have only letters,  numbers!')]
     # email = StringField('Email:', validators=[Required(), Email(message='Please input currect email address!')])
     # password = PasswordField('Password:', validators=[Required(), Length(6, 24, message='Password Length need to between 6 to 24!')])
     # repeat_password = PasswordField('Repeat Password:', validators=[Required(), EqualTo('password')])
+    version = SelectField('Version', validators=[Required()], choices=[('0', '全部'), ('1', '待审核'), ('2', '认证成功'), ('3', '认证失败')])
     menu_id = SelectField(label = "所属菜单",validators = [DataRequired("请选择菜单!")], 
     coerce = int, choices = "",render_kw = {"class":"form-control"})
 
@@ -75,21 +75,26 @@ class MigrateForm(FlaskForm):
 
     submit = SubmitField('Migrate')
 
-
-
-
     def migrate(self):
         version = self.version.data
+        # os.system("echo  flyway.url=" + config[db_name + '_url'] + ' > tmp.conf')
+        print('=====================================================================================')
         os.system('echo flyway.user='+self.mdb_id.data+' >> tmp.conf')
         os.system('echo flyway.password=Abcd1234 >> tmp.conf')
-        # os.system('./flyway -configFile=/app/flyway-4.2.0/tmp.conf ' + 'migrate')
+        print(version)
+        print('=====================================================================================')
+
+        # os.system('echo flyway.locations=' + config[db_name + '_locations'] + ' >> tmp.conf')
+        # action:
+        # os.system('./flyway -configFile=/app/flyway-4.2.0/tmp.conf ' + cmd)
+
 
     #     user.username = self.username.data
     #     user.email = self.email.data
     #     user.password = self.password.data
     #     db.session.add(user)
     #     db.session.commit()
-        return version
+        # return version
 
     # def validate_username(self, field):
     #     if User.query.filter_by(username=field.data).first():
